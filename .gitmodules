@@ -1,3 +1,3 @@
 [submodule "olcPixelGameEngine"]
 	path = olcPixelGameEngine
-	url = https://github.com/OneLoneCoder/olcPixelGameEngine.git
+	url = git@github.com:Tubbles/olcPixelGameEngine.git
