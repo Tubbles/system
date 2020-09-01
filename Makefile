@@ -10,5 +10,8 @@ incs := $(olc_path)/olcPixelGameEngine.h
 
 all: system
 
+clean:
+	-rm system
+
 system: $(srcs) $(incs)
 	g++ $(inc_dirs) $(srcs) -o system -std=c++20 -lX11 -lGL -lpthread -lpng -lstdc++fs

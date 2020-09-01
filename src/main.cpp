@@ -3,24 +3,36 @@
 
 #include "font.h"
 #include "keyparse.h"
+#include <chrono>
 #include <vector>
 
-constexpr int pixel_size = 1;
+constexpr int pixel_size = 2;
+
+using namespace std::chrono_literals;
 
 class System : public olc::PixelGameEngine {
+private:
+    RepeatData repeat_data;
+
 public:
     System() { sAppName = "System"; }
     std::string input;
 
-public:
-    bool OnUserCreate() override { return true; }
+    static constexpr std::chrono::milliseconds key_delay = 200ms;
+    static constexpr std::chrono::milliseconds key_repeat = 17ms;
+
+    bool OnUserCreate() override {
+        repeat_data.key_delay = key_delay;
+        repeat_data.key_repeat = key_repeat;
+        repeat_data.repeat_state = RepeatData::RepeatState::KEY_UP;
+        repeat_data.key_down_stamp = std::chrono::steady_clock::now();
+        return true;
+    }
 
     bool OnUserUpdate(float fElapsedTime) override {
         Clear(olc::BLACK);
 
-        // preview_font(this, GetMouseX() + 8, GetMouseY() + 8);
-
-        auto c = parse(this);
+        auto c = parse(this, repeat_data);
         if (c) {
             if (c.value() == '\b') {
                 if (input.size() > 0) {
@@ -31,10 +43,7 @@ public:
             }
         }
 
-        // type(this, GetMouseX() + 8, GetMouseY() + 8, "mouse pointer");
-
-        type(this, GetMouseX() + 16 * pixel_size, GetMouseY() + 16 * pixel_size,
-             input);
+        type(this, 1, 1, input);
 
         if (GetKey(olc::Key::ESCAPE).bPressed) {
             return false;
