@@ -303,31 +303,41 @@ std::optional<char> parse(olc::PixelGameEngine *olc, RepeatData &data) {
     }
 
     if (out != std::nullopt) {
-        switch (data.repeat_state) {
-        case RepeatData::RepeatState::KEY_UP: {
+        // Check if we quickly swapped the key since last time
+        if (data.prev_key != out) {
             data.repeat_state = RepeatData::RepeatState::KEY_DOWN;
             data.key_down_stamp = std::chrono::steady_clock::now();
-            break;
-        }
-        case RepeatData::RepeatState::KEY_DOWN: {
-            auto now = std::chrono::steady_clock::now();
-            if (now > data.key_down_stamp + data.key_delay) {
-                data.repeat_state = RepeatData::RepeatState::KEY_REPEATING;
-                data.key_down_stamp = now;
-            } else {
-                out = std::nullopt;
+            data.prev_key = out;
+        } else {
+            switch (data.repeat_state) {
+            case RepeatData::RepeatState::KEY_UP: {
+                data.repeat_state = RepeatData::RepeatState::KEY_DOWN;
+                data.key_down_stamp = std::chrono::steady_clock::now();
+                data.prev_key = out;
+                break;
             }
-            break;
-        }
-        case RepeatData::RepeatState::KEY_REPEATING: {
-            auto now = std::chrono::steady_clock::now();
-            if (now > data.key_down_stamp + data.key_repeat) {
-                data.key_down_stamp = now;
-            } else {
-                out = std::nullopt;
+            case RepeatData::RepeatState::KEY_DOWN: {
+                auto now = std::chrono::steady_clock::now();
+                if (now > data.key_down_stamp + data.key_delay) {
+                    data.repeat_state = RepeatData::RepeatState::KEY_REPEATING;
+                    data.key_down_stamp = now;
+                } else {
+                    data.prev_key = out;
+                    out = std::nullopt;
+                }
+                break;
             }
-            break;
-        }
+            case RepeatData::RepeatState::KEY_REPEATING: {
+                auto now = std::chrono::steady_clock::now();
+                if (now > data.key_down_stamp + data.key_repeat) {
+                    data.key_down_stamp = now;
+                } else {
+                    data.prev_key = out;
+                    out = std::nullopt;
+                }
+                break;
+            }
+            }
         }
     } else {
         data.repeat_state = RepeatData::RepeatState::KEY_UP;

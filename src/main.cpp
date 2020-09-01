@@ -26,6 +26,7 @@ public:
         repeat_data.key_repeat = key_repeat;
         repeat_data.repeat_state = RepeatData::RepeatState::KEY_UP;
         repeat_data.key_down_stamp = std::chrono::steady_clock::now();
+        repeat_data.prev_key = std::nullopt;
         return true;
     }
 
