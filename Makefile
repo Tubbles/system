@@ -5,7 +5,7 @@ olc_path := $(mkfile_path)/olcPixelGameEngine
 
 inc_dirs := -I$(olc_path)
 
-srcs := $(src_path)/main.cpp $(src_path)/font.cpp $(src_path)/keyparse.cpp
+srcs := $(wildcard $(src_path)/*.cpp)
 incs := $(olc_path)/olcPixelGameEngine.h
 
 all: system

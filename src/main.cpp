@@ -2,6 +2,7 @@
 #include "olcPixelGameEngine.h"
 
 #include "font.h"
+#include "kernel.h"
 #include "keyparse.h"
 #include <chrono>
 #include <vector>
@@ -13,6 +14,7 @@ using namespace std::chrono_literals;
 class System : public olc::PixelGameEngine {
 private:
     RepeatData repeat_data;
+    Machine mach;
 
 public:
     System() { sAppName = "System"; }
@@ -27,6 +29,8 @@ public:
         repeat_data.repeat_state = RepeatData::RepeatState::KEY_UP;
         repeat_data.key_down_stamp = std::chrono::steady_clock::now();
         repeat_data.prev_key = std::nullopt;
+
+        kinit(&mach, {.ramsize = kilo(1)});
         return true;
     }
 
