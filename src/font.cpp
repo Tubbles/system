@@ -15,29 +15,28 @@ uint8_t font_data_at_xy(int x, int y) {
     return font_data[y * font_data_width + x];
 }
 
-void type(olc::PixelGameEngine *olc, int x, int y, std::string str,
-          bool with_caret) {
+void type(k::Machine *mach, int x, int y, std::string str, bool with_caret) {
     const auto start_x = x;
     const auto start_y = y;
     for (auto c : str) {
-        type(olc, x, y, c);
+        type(mach, x, y, c);
         if (c == '\n') {
             y += font_char_height;
             x = start_x;
         } else {
             x += font_char_width;
-            if (x >= olc->ScreenWidth() - font_char_width + 2) {
+            if (x >= k::screenw(mach) - font_char_width + 2) {
                 y += font_char_height;
                 x = start_x;
             }
         }
     }
     if (with_caret) {
-        type(olc, x, y, '|');
+        type(mach, x, y, '|');
     }
 }
 
-void type(olc::PixelGameEngine *olc, int x, int y, char c) {
+void type(k::Machine *mach, int x, int y, char c) {
     if (c < 32 || c > 126) {
         return;
     }
@@ -50,17 +49,18 @@ void type(olc::PixelGameEngine *olc, int x, int y, char c) {
             auto d = font_data_at_xy(column * font_data_grid + x_map,
                                      row * font_data_grid + y_map);
             if (d) {
-                olc->Draw(x + x_map, y + y_map, olc::WHITE);
+                k::draw(mach, x + x_map, y + y_map,
+                        {.r = 0xFF, .g = 0xFF, .b = 0xFF});
             }
         }
     }
 }
 
-void preview_font(olc::PixelGameEngine *olc, int x, int y) {
+void preview_font(k::Machine *mach, int x, int y) {
     const std::string str = " !\"#$%&'()*+,-./"
                             "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`"
                             "abcdefghijklmnopqrstuvwxyz{|}~";
-    type(olc, x, y, str, false);
+    type(mach, x, y, str, false);
 }
 
 const std::vector<unsigned int> font_map = {

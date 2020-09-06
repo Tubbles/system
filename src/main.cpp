@@ -14,7 +14,7 @@ using namespace std::chrono_literals;
 class System : public olc::PixelGameEngine {
 private:
     RepeatData repeat_data;
-    Machine mach;
+    k::Machine mach;
 
 public:
     System() { sAppName = "System"; }
@@ -30,7 +30,9 @@ public:
         repeat_data.key_down_stamp = std::chrono::steady_clock::now();
         repeat_data.prev_key = std::nullopt;
 
-        kinit(&mach, {.ramsize = kilo(1)});
+        k::init(&mach, this,
+                {.ramsize = k::mega(1) + ScreenHeight() * ScreenHeight(),
+                 .drawoffset = k::kilo(1)});
         return true;
     }
 
@@ -48,7 +50,13 @@ public:
             }
         }
 
-        type(this, 1, 1, input);
+        type(&mach, 1, 1, input);
+
+        k::Pixel *p = k::drawptr(&mach);
+        for (size_t i = 0; i < k::screenw(&mach) * k::screenh(&mach); ++i) {
+            Draw(i % k::screenw(&mach), i / k::screenw(&mach),
+                 olc::Pixel(p[i].r, p[i].g, p[i].b));
+        }
 
         if (GetKey(olc::Key::ESCAPE).bPressed) {
             return false;

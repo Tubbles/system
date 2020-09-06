@@ -13,5 +13,5 @@ all: system
 clean:
 	-rm system
 
-system: $(srcs) $(incs)
-	g++ $(inc_dirs) $(srcs) -o system -std=c++20 -lX11 -lGL -lpthread -lpng -lstdc++fs
+system: $(srcs) $(incs) $(MAKEFILE_LIST)
+	g++ $(inc_dirs) $(srcs) -o system -ggdb -std=c++20 -lX11 -lGL -lpthread -lpng -lstdc++fs

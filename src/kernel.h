@@ -1,20 +1,36 @@
 #pragma once
 
+#include "olcPixelGameEngine.h"
 #include <array>
 #include <cstdint>
 #include <cstdlib>
 
+namespace k {
 struct Machine {
-    uint32_t *ram;
-    size_t *ram_size;
+    std::uint32_t *ram;
+    size_t ramsize;
+    size_t drawoffset;
+    olc::PixelGameEngine *olc;
 };
 
 struct MachineParams {
     size_t ramsize;
+    size_t drawoffset;
 };
 
-constexpr uint32_t kilo(uint32_t i) { return i * 1024; }
-constexpr uint32_t mega(uint32_t i) { return i * 1024 * 1024; }
-constexpr uint32_t giga(uint32_t i) { return i * 1024 * 1024 * 1024; }
+struct Pixel {
+    std::uint8_t r;
+    std::uint8_t g;
+    std::uint8_t b;
+};
 
-void kinit(Machine *m, MachineParams params);
+constexpr std::uint32_t kilo(std::uint32_t i) { return i * 1024; }
+constexpr std::uint32_t mega(std::uint32_t i) { return i * 1024 * 1024; }
+constexpr std::uint32_t giga(std::uint32_t i) { return i * 1024 * 1024 * 1024; }
+
+void init(Machine *m, olc::PixelGameEngine *olc, MachineParams params);
+void draw(Machine *m, uint32_t x, uint32_t y, Pixel p);
+std::uint32_t screenw(Machine *m);
+std::uint32_t screenh(Machine *m);
+Pixel *drawptr(Machine *m);
+} // namespace k
