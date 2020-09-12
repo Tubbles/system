@@ -4,6 +4,18 @@
 #include "app.h"
 #include "kernel.h"
 
+// Possible dependencies in the future:
+// fmt
+// imgui
+// sfml
+//
+
+// Possible toolchain in the future:
+// cmake
+// clang
+// conan
+//
+
 constexpr int pixel_size = 2;
 
 class System : public olc::PixelGameEngine {

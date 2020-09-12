@@ -317,8 +317,10 @@ std::optional<msg::msg> parse(olc::PixelGameEngine *olc, RepeatData &data) {
     }
 
     std::optional<msg::msg> out = std::nullopt;
+    std::optional<msg::msg> out_rep = out;
     if (out_val) {
         out = out_val;
+        out_rep = out_val & 0xFF;
     }
 
     if (out != std::nullopt) {
