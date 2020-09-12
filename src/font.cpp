@@ -32,7 +32,7 @@ void type(k::Machine *mach, int x, int y, std::string str, bool with_caret) {
         }
     }
     if (with_caret) {
-        type(mach, x, y, '|');
+        type_caret(mach, x, y);
     }
 }
 
@@ -40,7 +40,6 @@ void type(k::Machine *mach, int x, int y, char c) {
     if (c < 32 || c > 126) {
         return;
     }
-    // std::cout << " out: " << c;
     auto map = font_map[c - 32];
     for (int y_map = 0; y_map < font_char_height - 1; ++y_map) {
         for (int x_map = 0; x_map < font_char_width - 1; ++x_map) {
@@ -49,9 +48,16 @@ void type(k::Machine *mach, int x, int y, char c) {
             auto d = font_data_at_xy(column * font_data_grid + x_map,
                                      row * font_data_grid + y_map);
             if (d) {
-                k::draw(mach, x + x_map, y + y_map,
-                        {.r = 0xFF, .g = 0xFF, .b = 0xFF});
+                k::draw(mach, x + x_map, y + y_map, k::Pixel{0xFF, 0xFF, 0xFF});
             }
+        }
+    }
+}
+
+void type_caret(k::Machine *mach, int x, int y) {
+    for (int y_map = 0; y_map < font_char_height; ++y_map) {
+        for (int x_map = 0; x_map < font_char_width; ++x_map) {
+            k::draw(mach, x + x_map, y + y_map, k::Pixel{0xFF, 0xFF, 0xFF});
         }
     }
 }

@@ -1,305 +1,324 @@
 #include "keyparse.h"
 
-std::optional<char> parse(olc::PixelGameEngine *olc, RepeatData &data) {
-    std::optional<char> out = std::nullopt;
-    if (olc->GetKey(olc::Key::CTRL).bHeld) {
-        // Do nothing
-    } else if (olc->GetKey(olc::Key::A).bHeld) {
+std::optional<msg::msg> parse(olc::PixelGameEngine *olc, RepeatData &data) {
+    msg::msg out_val = 0;
+    if (olc->GetKey(olc::Key::A).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'A';
+            out_val = 'A';
         } else {
-            out = 'a';
+            out_val = 'a';
         }
     } else if (olc->GetKey(olc::Key::B).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'B';
+            out_val = 'B';
         } else {
-            out = 'b';
+            out_val = 'b';
         }
     } else if (olc->GetKey(olc::Key::C).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'C';
+            out_val = 'C';
         } else {
-            out = 'c';
+            out_val = 'c';
         }
     } else if (olc->GetKey(olc::Key::D).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'D';
+            out_val = 'D';
         } else {
-            out = 'd';
+            out_val = 'd';
         }
     } else if (olc->GetKey(olc::Key::E).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'E';
+            out_val = 'E';
         } else {
-            out = 'e';
+            out_val = 'e';
         }
     } else if (olc->GetKey(olc::Key::F).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'F';
+            out_val = 'F';
         } else {
-            out = 'f';
+            out_val = 'f';
         }
     } else if (olc->GetKey(olc::Key::G).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'G';
+            out_val = 'G';
         } else {
-            out = 'g';
+            out_val = 'g';
         }
     } else if (olc->GetKey(olc::Key::H).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'H';
+            out_val = 'H';
         } else {
-            out = 'h';
+            out_val = 'h';
         }
     } else if (olc->GetKey(olc::Key::I).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'I';
+            out_val = 'I';
         } else {
-            out = 'i';
+            out_val = 'i';
         }
     } else if (olc->GetKey(olc::Key::J).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'J';
+            out_val = 'J';
         } else {
-            out = 'j';
+            out_val = 'j';
         }
     } else if (olc->GetKey(olc::Key::K).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'K';
+            out_val = 'K';
         } else {
-            out = 'k';
+            out_val = 'k';
         }
     } else if (olc->GetKey(olc::Key::L).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'L';
+            out_val = 'L';
         } else {
-            out = 'l';
+            out_val = 'l';
         }
     } else if (olc->GetKey(olc::Key::M).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'M';
+            out_val = 'M';
         } else {
-            out = 'm';
+            out_val = 'm';
         }
     } else if (olc->GetKey(olc::Key::N).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'N';
+            out_val = 'N';
         } else {
-            out = 'n';
+            out_val = 'n';
         }
     } else if (olc->GetKey(olc::Key::O).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'O';
+            out_val = 'O';
         } else {
-            out = 'o';
+            out_val = 'o';
         }
     } else if (olc->GetKey(olc::Key::P).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'P';
+            out_val = 'P';
         } else {
-            out = 'p';
+            out_val = 'p';
         }
     } else if (olc->GetKey(olc::Key::Q).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'Q';
+            out_val = 'Q';
         } else {
-            out = 'q';
+            out_val = 'q';
         }
     } else if (olc->GetKey(olc::Key::R).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'R';
+            out_val = 'R';
         } else {
-            out = 'r';
+            out_val = 'r';
         }
     } else if (olc->GetKey(olc::Key::S).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'S';
+            out_val = 'S';
         } else {
-            out = 's';
+            out_val = 's';
         }
     } else if (olc->GetKey(olc::Key::T).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'T';
+            out_val = 'T';
         } else {
-            out = 't';
+            out_val = 't';
         }
     } else if (olc->GetKey(olc::Key::U).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'U';
+            out_val = 'U';
         } else {
-            out = 'u';
+            out_val = 'u';
         }
     } else if (olc->GetKey(olc::Key::V).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'V';
+            out_val = 'V';
         } else {
-            out = 'v';
+            out_val = 'v';
         }
     } else if (olc->GetKey(olc::Key::W).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'W';
+            out_val = 'W';
         } else {
-            out = 'w';
+            out_val = 'w';
         }
     } else if (olc->GetKey(olc::Key::X).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'X';
+            out_val = 'X';
         } else {
-            out = 'x';
+            out_val = 'x';
         }
     } else if (olc->GetKey(olc::Key::Y).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'Y';
+            out_val = 'Y';
         } else {
-            out = 'y';
+            out_val = 'y';
         }
     } else if (olc->GetKey(olc::Key::Z).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = 'Z';
+            out_val = 'Z';
         } else {
-            out = 'z';
+            out_val = 'z';
         }
     } else if (olc->GetKey(olc::Key::K0).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = ')';
+            out_val = ')';
         } else {
-            out = '0';
+            out_val = '0';
         }
     } else if (olc->GetKey(olc::Key::K1).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '!';
+            out_val = '!';
         } else {
-            out = '1';
+            out_val = '1';
         }
     } else if (olc->GetKey(olc::Key::K2).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '@';
+            out_val = '@';
         } else {
-            out = '2';
+            out_val = '2';
         }
     } else if (olc->GetKey(olc::Key::K3).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '#';
+            out_val = '#';
         } else {
-            out = '3';
+            out_val = '3';
         }
     } else if (olc->GetKey(olc::Key::K4).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '$';
+            out_val = '$';
         } else {
-            out = '4';
+            out_val = '4';
         }
     } else if (olc->GetKey(olc::Key::K5).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '%';
+            out_val = '%';
         } else {
-            out = '5';
+            out_val = '5';
         }
     } else if (olc->GetKey(olc::Key::K6).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '^';
+            out_val = '^';
         } else {
-            out = '6';
+            out_val = '6';
         }
     } else if (olc->GetKey(olc::Key::K7).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '&';
+            out_val = '&';
         } else {
-            out = '7';
+            out_val = '7';
         }
     } else if (olc->GetKey(olc::Key::K8).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '*';
+            out_val = '*';
         } else {
-            out = '8';
+            out_val = '8';
         }
     } else if (olc->GetKey(olc::Key::K9).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '(';
+            out_val = '(';
         } else {
-            out = '9';
+            out_val = '9';
         }
     } else if (olc->GetKey(olc::Key::SPACE).bHeld) {
-        out = ' ';
+        out_val = ' ';
     } else if (olc->GetKey(olc::Key::BACK).bHeld) {
-        out = '\b';
+        out_val = '\b';
     } else if (olc->GetKey(olc::Key::ESCAPE).bHeld) {
-        out = '\e';
+        out_val = '\e';
     } else if (olc->GetKey(olc::Key::ENTER).bHeld) {
-        out = '\n';
+        out_val = '\n';
     } else if (olc->GetKey(olc::Key::OEM_1).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = ':';
+            out_val = ':';
         } else {
-            out = ';';
+            out_val = ';';
         }
     } else if (olc->GetKey(olc::Key::OEM_2).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '?';
+            out_val = '?';
         } else {
-            out = '/';
+            out_val = '/';
         }
     } else if (olc->GetKey(olc::Key::OEM_3).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '~';
+            out_val = '~';
         } else {
-            out = '`';
+            out_val = '`';
         }
     } else if (olc->GetKey(olc::Key::OEM_4).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '{';
+            out_val = '{';
         } else {
-            out = '[';
+            out_val = '[';
         }
     } else if (olc->GetKey(olc::Key::OEM_5).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '|';
+            out_val = '|';
         } else {
-            out = '\\';
+            out_val = '\\';
         }
     } else if (olc->GetKey(olc::Key::OEM_6).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '}';
+            out_val = '}';
         } else {
-            out = ']';
+            out_val = ']';
         }
     } else if (olc->GetKey(olc::Key::OEM_7).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '"';
+            out_val = '"';
         } else {
-            out = '\'';
+            out_val = '\'';
         }
     } else if (olc->GetKey(olc::Key::OEM_8).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '?';
+            out_val = '?';
         } else {
-            out = '?';
+            out_val = '?';
         }
     } else if (olc->GetKey(olc::Key::EQUALS).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '+';
+            out_val = '+';
         } else {
-            out = '=';
+            out_val = '=';
         }
     } else if (olc->GetKey(olc::Key::COMMA).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '<';
+            out_val = '<';
         } else {
-            out = ',';
+            out_val = ',';
         }
     } else if (olc->GetKey(olc::Key::MINUS).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '_';
+            out_val = '_';
         } else {
-            out = '-';
+            out_val = '-';
         }
     } else if (olc->GetKey(olc::Key::PERIOD).bHeld) {
         if (olc->GetKey(olc::Key::SHIFT).bHeld) {
-            out = '>';
+            out_val = '>';
         } else {
-            out = '.';
+            out_val = '.';
         }
+    } else if (olc->GetKey(olc::Key::LEFT).bHeld) {
+        out_val = msg::LEFT;
+    } else if (olc->GetKey(olc::Key::DOWN).bHeld) {
+        out_val = msg::DOWN;
+    } else if (olc->GetKey(olc::Key::UP).bHeld) {
+        out_val = msg::UP;
+    } else if (olc->GetKey(olc::Key::RIGHT).bHeld) {
+        out_val = msg::RIGHT;
+    }
+
+    // Check modifiers
+    if (olc->GetKey(olc::Key::SHIFT).bHeld) {
+        out_val += msg::SHIFT_MODIFIER;
+    }
+    if (olc->GetKey(olc::Key::CTRL).bHeld) {
+        out_val += msg::CTRL_MODIFIER;
+    }
+
+    std::optional<msg::msg> out = std::nullopt;
+    if (out_val) {
+        out = out_val;
     }
 
     if (out != std::nullopt) {

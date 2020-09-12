@@ -1,5 +1,6 @@
 #pragma once
 
+#include "message.h"
 #include "olcPixelGameEngine.h"
 #include <optional>
 
@@ -13,7 +14,7 @@ struct RepeatData {
     std::chrono::milliseconds key_delay, key_repeat;
     RepeatState repeat_state;
     std::chrono::time_point<std::chrono::steady_clock> key_down_stamp;
-    std::optional<char> prev_key;
+    std::optional<msg::msg> prev_key;
 };
 
-std::optional<char> parse(olc::PixelGameEngine *olc, RepeatData &data);
+std::optional<msg::msg> parse(olc::PixelGameEngine *olc, RepeatData &data);

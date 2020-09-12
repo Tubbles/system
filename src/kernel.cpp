@@ -8,7 +8,14 @@ void k::init(Machine *m, olc::PixelGameEngine *olc, MachineParams params) {
 }
 
 void k::draw(Machine *m, uint32_t x, uint32_t y, Pixel p) {
-    reinterpret_cast<Pixel *>(m->drawoffset)[x + y * k::screenw(m)] = p;
+    drawptr(m)[x + y * k::screenw(m)] = p;
+}
+
+void k::drawclear(Machine *m, Pixel p) {
+    Pixel *pp = drawptr(m);
+    for (size_t i = 0; i < screenw(m) * screenh(m); ++i) {
+        pp[i] = p;
+    }
 }
 
 std::uint32_t k::screenw(Machine *m) { return m->olc->ScreenWidth(); }
@@ -16,5 +23,5 @@ std::uint32_t k::screenw(Machine *m) { return m->olc->ScreenWidth(); }
 std::uint32_t k::screenh(Machine *m) { return m->olc->ScreenHeight(); }
 
 k::Pixel *k::drawptr(Machine *m) {
-    return reinterpret_cast<Pixel *>(m->drawoffset);
+    return reinterpret_cast<Pixel *>(m->ram + m->drawoffset);
 }
